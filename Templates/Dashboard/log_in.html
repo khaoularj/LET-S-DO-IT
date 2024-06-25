@@ -181,28 +181,13 @@
               <a href="{{ url_for('index') }}" class="text-zinc-700 font-bold dark:text-zinc-300">FAQs</a>
               <a href="/auth/signup" class=" text-zinc-700 font-bold">Sign Up</a>
               <a href="/auth/login"  class=" text-zinc-700 font-bold">Log in</a>
-              <!--<a href="#" class="text-zinc-700 dark:text-zinc-300">Easy to Use</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Stay Organized</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Track Your Progress</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Statistics</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Features</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">FAQ</a>-->
             </nav>
           </div>
         </div>  
       </header>
       
     <main class="container mx-auto flex justify-center items-center h-screen px-4 py-8" style="margin-bottom:-50px; margin-top:-20px;">
-      <!--LOG IN!!!!-->
         <form class="form" method="POST" action="/auth/login"> <br><br>
-           <!-- <img
-              class="mb-4 mx-auto flex justify-center items-center"
-              src="/static/images/icon.png"
-              alt=""
-              width="72"
-              height="57"
-            />-->
-
         <div class="flex-column">
           <label>Email </label>
         </div>
@@ -221,7 +206,6 @@
           </svg>
           {{ form.hidden_tag() }}
         {{ form.email(class="input", id="floatingInput", placeholder="Enter your Email", type="text") }}
-          <!--<input placeholder="Enter your Email" class="input" type="text" />-->
         </div>
       
         <div class="flex-column">
@@ -242,7 +226,6 @@
             ></path>
           </svg>
           {{ form.password(class="input", id="floatingPassword", placeholder="Enter your Password", type="password") }}
-          <!--<input placeholder="Enter your Password" class="input" type="password" />-->
         </div>
       
         <div class="flex-row">

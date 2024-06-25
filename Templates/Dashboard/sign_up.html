@@ -8,7 +8,6 @@
     <style>
       .bg-custom {
         background-color: #fbf6e9;
-        /*background: linear-gradient(45deg, rgb(248, 178, 178), rgb(250, 250, 157));*/
       }
       .form {
         display: flex;
@@ -16,7 +15,6 @@
         gap: 10px;
         background: linear-gradient(45deg, rgb(248, 178, 178), rgb(250, 250, 157));
         padding: 30px;
-        /*width: 450px;*/
         width: 60%;
         height: 70%;
         max-width: 600px;
@@ -181,12 +179,6 @@
               <a href="{{ url_for('index') }}" class="text-zinc-700 font-bold dark:text-zinc-300">FAQs</a>
               <a href="/auth/signup" class=" text-zinc-700 font-bold">Sign Up</a>
               <a href="/auth/login"  class=" text-zinc-700 font-bold">Log in</a>
-              <!--<a href="#" class="text-zinc-700 dark:text-zinc-300">Easy to Use</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Stay Organized</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Track Your Progress</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Statistics</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">Features</a>
-              <a href="#" class="text-zinc-700 dark:text-zinc-300">FAQ</a>-->
             </nav>
           </div>
         </div>  
@@ -254,7 +246,6 @@
             ></path>
           </svg>
           {{ form.password(class="input", id="floatingPassword", placeholder="Enter your Password", type="password") }}
-          <!--<input placeholder="Enter your Password" class="input" type="password" />-->
         </div>
       
         
@@ -264,7 +255,6 @@
       </form>
 
       <form class="form-flex " style="margin-left:100px;">
-        <!--<div class="py-8 justify-center items-center" style="margin-left:50px;">-->
           <div class="flex flex-col justify-center items-center" >
          {% include 'partials/loadin_logo.html' %}
          </div> 
@@ -289,4 +279,4 @@
         </footer>
       </div>
         </body>
-      </html>   
+    </html>
