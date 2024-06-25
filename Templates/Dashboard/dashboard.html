@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Personnal Dashboard</title>
+    <style>
+      
+      .bg-custom {
+        background-color: #fbf6e9;
+        /*background: linear-gradient(-90deg, rgb(250, 250, 157), rgb(248, 178, 178)  );*/
+      }
+     /*
+      .card {
+        position: relative;
+        width: 300px;
+        height: 350;
+        background: linear-gradient(135deg, #ebd4d8 0%, #dbe7e5 100%);
+        border-radius: 14px;
+        box-shadow: 20px 20px 60px #bebebe, 5px 5px 10px #ffffff;
+        z-index: 1111;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }*/
+      
+      .content {
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          transition: transform 300ms;
+          box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+          border-radius: 5px;
+        }
+  
+        .front, .back {
+          /*background-color: 20px 20px 60px #bebebe, -10px -10px 60px #ffffff;
+          background: linear-gradient(135deg, #eecfd4 0%, #c7dfdb 100%);*/
+          background: linear-gradient(135deg, #ebd4d8 0%, #dbe7e5 100%);
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          border-radius: 14px;
+          overflow: hidden;
+        }
+  
+  
+        .back {
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+        }
+  
+        .back::before {
+          position: absolute;
+          content: ' ';
+          display: block;
+          width: 160px;
+          height: 160%;
+          /*background: linear-gradient(135deg, #eecfd4 0%, #c7dfdb 100%);
+          background: linear-gradient(135deg, #ebadb6 0%, #aceae1 100%);*/
+          background: linear-gradient(135deg, #ebd4d8 0%, #dbe7e5 100%);
+          animation: rotation_481 5000ms infinite linear;
+        }
+  
+  
+        .back-content {
+          position: absolute;
+          width: 99%;
+          height: 99%;
+          background-color: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+          border-radius: 5px;
+          color: #000000;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 30px;
+        }
+  
+        .card:hover .content {
+          transform: rotateY(180deg);
+        }
+  
+        .bg {
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          width: 190px;
+          height: 240px;
+          z-index: 2;
+          background: rgba(255, 255, 255, .95);
+          /*background: linear-gradient(135deg, #ebadb6 0%, #aceae1 100%);*/
+          background: linear-gradient(135deg, #ebd4d8 0%, #dbe7e5 100%);
+          backdrop-filter: blur(24px);
+          border-radius: 10px;
+          overflow: hidden;
+          outline: 2px solid white;
+        }
+      
+      .blob {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #f5bebe;
+        opacity: 1;
+        filter: blur(12px);
+        animation: blob-bounce 5s infinite ease;
+      }
+      
+  
+      
+        
+      .front {
+          transform: rotateY(180deg);
+          /*color: rgb(136, 121, 121);*/
+          color: #2e2e2e;
+        } 
+  
+        .front .front-content {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+  
+        /*
+       .description {
+          box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+          width: 100%;
+          padding: 10px;
+          background-color: linear-gradient(135deg, #ebadb6 0%, #aceae1 100%);
+          backdrop-filter: blur(5px);
+          border-radius: 5px;
+        }
+  */
+        .title {
+          font-size: 11px;
+          max-width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+        
+        .title p {
+          width: 50%;
+        }
+        
+        .card-footer {
+          color: #ffffff88;
+          margin-top: 5px;
+          font-size: 8px;
+        }
+        
+        .front .img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+  
+  
+        @keyframes floating {
+          0% {
+            transform: translateY(0px);
+          }
+        
+          50% {
+            transform: translateY(10px);
+          }
+        
+          100% {
+            transform: translateY(0px);
+          }
+        }
+  
+  
+        @keyframes blob-bounce {
+          0% {
+            transform: translate(-100%, -100%) translate3d(0, 0, 0);
+          }
+        
+          25% {
+            transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+          }
+        
+          50% {
+            transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+          }
+        
+          75% {
+            transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+          }
+        
+          100% {
+            transform: translate(-100%, -100%) translate3d(0, 0, 0);
+          }
+        }
+  
+        .button {
+          position: relative;
+          overflow: hidden;
+          height: 3rem;
+          padding: 0 2rem;
+          border-radius: 1.5rem;
+          /*background: linear-gradient(
+            82.3deg,
+            rgb(148, 109, 206) 10.8%,
+            rgb(120, 112, 223) 94.3%
+          );*/
+          background: linear-gradient(
+            82.3deg,
+            rgb(173, 147, 211) 10.8%,
+            rgb(149, 144, 218) 94.3%
+          );
+          
+          background-size: 400%;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .button:hover::before {
+          transform: scaleX(1);
+        }
+        
+        .button-content {
+          position: relative;
+          z-index: 1;
+        }
+        
+        .button::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: scaleX(0);
+          transform-origin: 0 50%;
+          width: 100%;
+          height: inherit;
+          border-radius: inherit;
+          background: #5d5a6d;
+          transition: all 0.475s;
+        }
+        
+        .completed-task {
+          text-decoration: line-through; /* Apply strikethrough */
+          color: #999; /* Optional: Adjust color to indicate completed state */
+      }
+    </style>
+  </head>
+
+  <body class="bg-custom shadow rounded-lg" > 
+
+    <div class="bg-custom dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50" >
+      <header class="bg-white dark:bg-zinc-800 shadow" style="background: linear-gradient(45deg, rgb(248, 178, 178), rgb(250, 250, 157) );">
+        <div class="container mx-auto px-4 py-0 flex justify-between items-center" >
+          <a class="navbar-brand" href="{{ url_for('index') }}">
+            <img
+              src="{{url_for('static', filename='/images/icon.png')}}"
+              alt="Logo"
+              width="60"
+              height="60"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <div class="text-xl" style="margin-left:-120px;">{% include 'partials/loadin_logo.html' %}</div>
+            <nav class="flex space-x-4 items-center">
+              <a href="#home" class="text-black dark:text-white font-semibold border-b-2 border-black">Dashboard</a>
+              <a href="#get started" class="text-zinc-600 font-bold dark:text-zinc-400 hover:text-black dark:hover:text-white">Statistics</a>
+              <!--<a href="#features" class="text-zinc-600 font-bold dark:text-zinc-400 hover:text-black dark:hover:text-white">Profile</a>
+              <a href="#benefits" class="text-zinc-600 font-bold dark:text-zinc-400 hover:text-black dark:hover:text-white">settings</a>-->
+              <a href="{{url_for('log_out')}}" class="text-zinc-600 font-bold dark:text-zinc-400 hover:text-black dark:hover:text-white">Log Out</a>
+              <a href="#" class="button-message text-zinc-600 font-bold dark:text-zinc-400 hover:text-black dark:hover:text-white">
+               
+                <style>
+                  #btn-message {
+                    --text-color: #000;
+                    --bg-color-sup: #d2d2d2;
+                    --bg-color: #fbf6e9;
+                    --bg-hover-color: #d2d2d2;
+                    --online-status: #d2d2d2;
+                    --font-size: 16px;
+                    --btn-transition: all 0.2s ease-out;
+                  }
+                  
+                  .button-message {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font: 400 var(--font-size) Helvetica Neue, sans-serif;
+                    box-shadow: 0 0 2.17382px rgba(0,0,0,.049),0 1.75px 6.01034px rgba(0,0,0,.07),0 3.63px 14.4706px rgba(0,0,0,.091),0 22px 48px rgba(0,0,0,.14);
+                    background-color: var(--bg-color);
+                    border-radius: 68px;
+                    cursor: pointer;
+                    padding: 6px 10px 6px 6px;
+                    width: fit-content;
+                    height: 40px;
+                    border: 0;
+                    overflow: hidden;
+                    position: relative;
+                    transition: var(--btn-transition);
+                  }
+                  
+                  
+                  
+                  
+                  
+                  .content-avatar {
+                    width: 30px;
+                    height: 30px;
+                    margin: 0;
+                    transition: var(--btn-transition);
+                    position: relative;
+                  }
+                  
+                  
+                  
+                  .avatar {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    background-color: var(--bg-color-sup);
+                  }
+                  
+                  .user-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  }
+                  
+                  
+                  
+                  
+                  
+                  .notice-content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    padding-left: 8px;
+                    text-align: initial;
+                    color: var(--text-color);
+                  }
+                  
+                  .username {
+                    letter-spacing: -6px;
+                    height: 0;
+                    opacity: 0;
+                    transform: translateY(-20px);
+                    transition: var(--btn-transition);
+                  }
+                  
+                  .user-id {
+                    font-size: 12px;
+                    letter-spacing: -6px;
+                    height: 0;
+                    opacity: 0;
+                    transform: translateY(10px);
+                    transition: var(--btn-transition);
+                  }
+                  
+                  .lable-message {
+                    display: flex;
+                    align-items: center;
+                    opacity: 1;
+                    transform: scaleY(1);
+                    transition: var(--btn-transition);
+                  }
+                  
+                  .button-message:hover .username {
+                    height: auto;
+                    letter-spacing: normal;
+                    opacity: 1;
+                    transform: translateY(0);
+                    transition: var(--btn-transition);
+                  }
+                  
+                  .button-message:hover .user-id {
+                    height: auto;
+                    letter-spacing: normal;
+                    opacity: 1;
+                    transform: translateY(0);
+                    transition: var(--btn-transition);
+                  }
+                  
+                  .button-message:hover .lable-message {
+                    height: 0;
+                    transform: scaleY(0);
+                    transition: var(--btn-transition);
+                  }
+                  
+                  .lable-message, .username {
+                    font-weight: 600;
+                  }
+                  
+                  .number-message {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    margin-left: 8px;
+                    font-size: 12px;
+                    width: 16px;
+                    height: 16px;
+                    background-color: var(--bg-color-sup);
+                    border-radius: 20px;
+                  }
+                  
+                  /*==============================================*/
+                  @keyframes active-status {
+                    0% {
+                      background-color: var(--online-status);
+                    }
+                  
+                    33.33% {
+                      background-color: #d2d2d2;
+                    }
+                  
+                    66.33% {
+                      background-color: #d2d2d2;
+                    }
+                  
+                    100% {
+                      background-color: var(--online-status);
+                    }
+                  }
+                </style>
+                  <div class="content-avatar">
+                      <div class="status-user"></div>
+                      <div class="avatar">
+                          <svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z"></path></svg>
+                      </div>
+                  </div>
+                  <div class="notice-content">
+                      <div class="username">{{ current_user.username }}</div>
+                      <div class="lable-message">{{ current_user.username }}</div>
+                  </div>
+              </a>
+                
+            </nav>
+          </div>
+        </div>  
+      </header>
+
+      
+      
+      <div class="flex text-gray-900">
+         <aside class="flex h-screen w-42 flex-col items-center border-r border-gray-200 bg-white" style="background: linear-gradient(-25deg, rgb(250, 250, 157), rgb(248, 178, 178)); border-radius: -68px;">
+   
+          <nav class="flex flex-1 flex-col gap-y-4 pt-12">
+            <!--Add List Form -->
+             
+            <a href="#" class="mb-4 px-4">
+              <form action="/add_list" method="post" class="mb-4">
+                <!--<div class="form-group">
+                  <input type="text" name="list_name" class="form-control" placeholder="Add new list" required>
+                </div>-->
+
+                <div class="InputContainer">
+                  <style>
+                    .InputContainer {
+                      width: 210px;
+                      height: 50px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: linear-gradient(to bottom,rgb(227, 213, 255),rgb(255, 231, 231));
+                      border-radius: 30px;
+                      overflow: hidden;
+                      cursor: pointer;
+                      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+                    }
+                    
+                    .input {
+                      width: 200px;
+                      height: 40px;
+                      border: none;
+                      outline: none;
+                      caret-color: rgb(255, 81, 0);
+                      background-color: rgb(255, 255, 255);
+                      border-radius: 30px;
+                      padding-left: 15px;
+                      letter-spacing: 0.8px;
+                      color: rgb(19, 19, 19);
+                      font-size: 13.4px;
+                    }
+                    
+                  </style>
+                  <input type="text" name="list_name" class="input" placeholder="Add a new list" required>
+                </div>
+
+           <!--BUTTON ADD-->     
+           <div class="flex justify-center items-center">
+                <button type="submit" class="btn  mt-2 "><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                  </svg></button>
+           </div>
+              </form>  
+
+              </a>
+
+            <div class="container px-4">
+              
+
+      
+              <!-- Lists and Tasks -->
+              
+            </div>
+          </nav>
+        </aside>
+      
+
+      
+    <main class="container  mx-auto px-4 py-8 ">
+        <div  class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center">
+            <div id="#" class="md:w-1/2">
+              <h2 class="text-4xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">
+              
+                {% if current_user.is_authenticated %}
+                    <h2 class="text-4xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">Welcome, {{ current_user.username }}!</h2>
+                {% endif %}</h2>
+            </div>
+        </div>
+
+        
+        <div class="container ">
+
+          <div class="card-container" >
+              {% for list in lists %}
+              <div class="card custom-card mb-4 " style="background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);" >
+                <style>
+                  .card-container {
+                    display: flex;
+                    flex-wrap: wrap-reverse; /* Allows wrapping to the next line */
+                     gap: 20px; /* Gap between cards */
+                }
+                
+                  .custom-card {
+                    width: 450px; /* Adjust the width as needed */
+
+                    border-radius: 15px;
+                    background: #f8f8f8;
+                    /*box-shadow: 10px 10px 20px #d0d0d0, -10px -10px 20px #ffffff;*/
+                    box-shadow: 10px 10px 20px #e6e6e6, -10px -10px 20px #ffffff;
+                    padding: 15px;
+                    margin-bottom: 20px;
+                }
+
+
+                </style>
+                  <div class="card-header d-flex  justify-content-between align-items-center " style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                      <h5 >{{ list.name }}</h5>
+                      <form action="/delete_list/{{ list.id }}" method="post" class="d-inline" >
+                          <button type="submit" class="btn  btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+                            <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293z"/>
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                          </svg></button>
+                      </form>
+                  </div>
+
+                  <div class="card-body" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                    <ul class="list-group mb-3 " style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                        {% for task in list.tasks %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(255, 238, 238)10.8%, rgb(255, 255, 230)94.3%);">
+                            <span class="{{ 'completed-task' if task.complete else '' }}">{{ task.description }}</span>
+                            <div>
+
+                             
+
+                                <form action="/update_task/{{ task.id }}" method="post" class="d-inline">
+                        
+                                      <button class="btn  btn-sm" type="submit">
+                                        {% if not task.complete %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                        </svg>
+                                    {% else %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                            <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                                        </svg>
+                                    {% endif %}
+                                     <!-- {{ 'Incomplete' if not task.complete else 'Completed' }}-->
+                                  </button>
+                              </form>
+                                
+
+                                <form action="/delete_task/{{ task.id }}" method="post" class="d-inline">
+                                    <button type="submit" class="btn  btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-octagon" viewBox="0 0 16 16">
+                                        <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1z"/>
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                      </svg></button>
+                                </form>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    
+
+                    <form action="/add_task/{{ list.id }}" method="post">
+                        <div class="form-group" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                            <input type="text" name="task_description" class="form-control" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(255, 238, 238)10.8%, rgb(255, 255, 230)94.3%); height:45px;" placeholder="Add a new task" required>
+                        </div>
+                        <button type="submit" class="btn " style="border-radius: 1.5rem; background: linear-gradient(45deg, rgb(253, 210, 210)10.8%, rgb(248, 248, 184)94.3%); ">Add Task  
+                        </button>
+                    </form>
+                </div>
+                  
+        <!--
+                  <div class="card-body" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                      <ul class="list-group mb-3 " style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                          {% for task in list.tasks %}
+                          <li class="list-group-item d-flex justify-content-between align-items-center" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(255, 238, 238)10.8%, rgb(255, 255, 230)94.3%);">
+                              <span class="{{ 'completed-task' if task.complete else '' }}" >{{ task.description }}</span>
+                              <div>
+
+                               
+
+                                  <form action="/update_task/{{ task.id }}" method="post" class="d-inline">
+                          
+                                        <button class="btn btn-{% if not task.complete %}outline-secondary{% else %}success{% endif %} btn-sm" type="submit">
+
+                                        {{ 'Incomplete' if not task.complete else 'Completed' }}
+                                    </button>
+                                </form>
+                                  
+  
+                                  <form action="/delete_task/{{ task.id }}" method="post" class="d-inline">
+                                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                  </form>
+                              </div>
+                          </li>
+                          {% endfor %}
+                      </ul>
+                      
+  
+                      <form action="/add_task/{{ list.id }}" method="post">
+                          <div class="form-group" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);">
+                              <input type="text" name="task_description" class="form-control" style="border-radius: 0.5rem; background: linear-gradient(82.3deg, rgb(255, 238, 238)10.8%, rgb(255, 255, 230)94.3%); height:45px;" placeholder="Add a new task" required>
+                          </div>
+                          <button type="submit" class="btn " style="border-radius: 1.5rem; background: linear-gradient(82.3deg, rgb(253, 199, 199)10.8%, rgb(253, 253, 176)94.3%); ">Add Task  
+                          </button>
+                      </form>
+                  </div>-->
+
+
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+
+    
+    </main>
+</div>
+
+
+        <footer class="bg-zinc-100 dark:bg-zinc-800 text-center py-4" style="background: linear-gradient(45deg, rgb(250, 250, 157), rgb(248, 178, 178));">
+          <p>&copy; Copyright LET'S DO IT | 2024</p>
+        </footer>
+      </div>
+        </body>
+      </html>   
