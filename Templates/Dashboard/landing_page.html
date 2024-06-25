@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-custom {
+        background-color: #fbf6e9;
+      }
+      .card {
+        position: relative;
+        width: 300px;
+        height: 350;
+        background: linear-gradient(45deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);
+        border-radius: 14px;
+        box-shadow: 20px 20px 60px #bebebe, 5px 5px 10px #ffffff;
+        z-index: 1111;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .content {
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          transition: transform 300ms;
+          box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+          border-radius: 5px;
+        }
+  
+        .front, .back {
+          background: linear-gradient(45deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          border-radius: 14px;
+          overflow: hidden;
+        }
+  
+  
+        .back {
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+        }
+  
+        .back::before {
+          position: absolute;
+          content: ' ';
+          display: block;
+          width: 160px;
+          height: 160%;
+          background: linear-gradient(45deg, rgb(252, 223, 223)10.8%, rgb(255, 255, 212)94.3%);
+          animation: rotation_481 5000ms infinite linear;
+        }
+  
+  
+        .back-content {
+          position: absolute;
+          width: 99%;
+          height: 99%;
+          background-color: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+          border-radius: 5px;
+          color: #000000;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 30px;
+        }
+  
+        .card:hover .content {
+          transform: rotateY(180deg);
+        }
+  
+        .bg {
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          width: 190px;
+          height: 240px;
+          z-index: 2;
+          background: rgba(255, 255, 255, .95);
+          background: linear-gradient(45deg, rgb(250, 217, 217), rgb(255, 255, 188));
+          backdrop-filter: blur(24px);
+          border-radius: 10px;
+          overflow: hidden;
+          outline: 2px solid white;
+        }
+      
+      .blob {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #f5bebe;
+        opacity: 1;
+        filter: blur(12px);
+        animation: blob-bounce 5s infinite ease;
+      }
+      
+  
+      
+        
+      .front {
+          transform: rotateY(180deg);
+          color: #545353;
+        } 
+  
+        .front .front-content {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .title {
+          font-size: 11px;
+          max-width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+        
+        .title p {
+          width: 50%;
+        }
+        
+        .card-footer {
+          color: #ffffff88;
+          margin-top: 5px;
+          font-size: 8px;
+        }
+        
+        .front .img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+  
+  
+        @keyframes floating {
+          0% {
+            transform: translateY(0px);
+          }
+        
+          50% {
+            transform: translateY(10px);
+          }
+        
+          100% {
+            transform: translateY(0px);
+          }
+        }
+  
+  
+        @keyframes blob-bounce {
+          0% {
+            transform: translate(-100%, -100%) translate3d(0, 0, 0);
+          }
+        
+          25% {
+            transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+          }
+        
+          50% {
+            transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+          }
+        
+          75% {
+            transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+          }
+        
+          100% {
+            transform: translate(-100%, -100%) translate3d(0, 0, 0);
+          }
+        }
+  
+        .button {
+          position: relative;
+          overflow: hidden;
+          height: 3rem;
+          padding: 0 2rem;
+          border-radius: 1.5rem;
+          background: linear-gradient(82.3deg, rgb(248, 178, 178)10.8%, rgb(250, 250, 157)94.3%);
+          background-size: 400%;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .button:hover::before {
+          transform: scaleX(1);
+        }
+        
+        .button-content {
+          position: relative;
+          z-index: 1;
+        }
+        
+        .button::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: scaleX(0);
+          transform-origin: 0 50%;
+          width: 100%;
+          height: inherit;
+          border-radius: inherit;
+          background: #5d5a6d;
+          transition: all 0.475s;
+        }
+    </style>
+  </head>
+
+  <body class="bg-custom">
+    <div class="bg-custom dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50" >
+      <header class="bg-white dark:bg-zinc-800 shadow" style="background: #fbf6e9;">
+        <div class="container mx-auto px-4 py-0 flex justify-between items-center" >
+          <a class="navbar-brand" href="{{ url_for('index') }}">
+            <img
+              src="{{url_for('static', filename='/images/icon.png')}}"
+              alt="Logo"
+              width="60"
+              height="60"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <div class="text-xl" style="margin-left:-120px;">{% include 'partials/loadin_logo.html' %}</div>
+            <nav class="space-x-4">
+              <a href="#home" class="text-zinc-700 font-bold dark:text-zinc-300">Home</a>
+              <a href="#get started" class="text-zinc-700 font-bold dark:text-zinc-300">Get Started</a>
+              <a href="#benefits" class="text-zinc-700 font-bold dark:text-zinc-300">Benefits</a>
+              <a href="#features" class="text-zinc-700 font-bold dark:text-zinc-300">Features</a>
+              <a href="#stats" class="text-zinc-700 font-bold dark:text-zinc-300">Stats</a>
+              <a href="#faqs" class="text-zinc-700 font-bold dark:text-zinc-300">FAQs</a>
+              <a href="/auth/signup" class=" text-zinc-700 font-bold">Sign Up</a>
+              <a href="/auth/login"  class=" text-zinc-700 font-bold">Log in</a>
+            </nav>
+          </div>
+        </div>  
+      </header>
+      
+
+    <main id="home" class="container mx-auto px-4 py-8">
+      <div  class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center">
+        <div id="get started" class="md:w-1/2">
+          <h2 class="text-4xl font-bold text-zinc-800 dark:text-zinc-100 mb-4">Stay Organized and Get Things Done</h2>
+          <p class="text-zinc-600 dark:text-zinc-300 mb-6">Welcome to LET'S DO IT, the ultimate todo list web app that helps you stay organized and accomplish your tasks. With our intuitive interface and powerful features, you can easily manage your tasks, set deadlines, and track your progress. Start using LET'S DO IT today and take control of your productivity.</p>
+          <section class="text-center py-4">
+            <h2 class="text-2xl font-bold mb-4 text-center">Start Organizing Your Life Today</h2>
+            <button class="button">
+              <a href="/auth/signup" class="button-content">Sign Up Now</a>
+            </button>
+            
+            <button class="button">
+              <a href="/auth/login" class="button-content">Log in</a>
+            </button>
+            
+          </section>
+        </div>
+        <div class="md:w-1/2 mt-8 md:mt-0" style="margin-right:100px;">
+          <img src="{{url_for('static', filename='/images/DASHBOARD_PERSONAL.png')}}" alt="Mobile app preview" class="rounded-lg shadow-lg" style="margin-left:100px;">
+         </div>
+      </div>
+
+      <br><br><br><br><br>
+      
+      <section id="benefits" class="py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex items-center">
+            <img src="{{url_for('static', filename='/images/stay_focus.png')}}" width="400px" height="50px" alt="Stay Motivated" class="rounded-lg shadow-lg" style="margin-left: 100px;" >
+          </div>
+          <div class="flex flex-col justify-center" style="margin-right: 100px; margin-left:210px;">
+            <h2 class="text-2xl font-bold mb-4">Stay Focused</h2>
+            <p class="mb-4">With LET'S DO IT, you can easily create, organize, and prioritize your tasks. Our app provides you with a clear overview of your to-do list, allowing you to stay focused and accomplish your goals. Say goodbye to scattered notes and hello to a well-structured task management system.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="py-8">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex flex-col justify-center" style="margin-left: 100px; margin-right: 210px;">
+            <h2 class="text-2xl font-bold mb-4">Stay Motivated</h2>
+            <p class="mb-4">Achieving your goals requires motivation and perseverance. Let's Do It keeps you motivated by providing visual progress tracking. With our built-in progress tracking feature, you can see how far you've come and celebrate your accomplishments. Stay motivated and inspired as you see your tasks getting checked off one by one.
+              </p>
+          </div>
+          <div class="flex items-center">
+            <img src="{{url_for('static', filename='/images/stay_motivated.png')}}" width="400px" height="50px" alt="Stay Focused" class="rounded-lg shadow-lg" style="margin-left: 210px;">
+          </div>
+        </div>
+      </section>
+      
+      <section class="py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex items-center">
+            <img src="{{url_for('static', filename='/images/stay_organized.png')}}" width="400px" height="50px" alt="Stay Organized" class="rounded-lg shadow-lg" style="margin-left: 100px;">
+          </div>
+          <div class="flex flex-col justify-center" style="margin-right: 100px; margin-left:210px;">
+            <h2 class="text-2xl font-bold mb-4">Stay Organized</h2>
+            <p class="mb-4">LET'S DO IT offers a comprehensive set of organizational features to keep your tasks, projects, and goals in order. 
+              Say goodbye to missed deadlines and forgotten tasks.  Start managing your tasks efficiently today and experience the difference it makes in your productivity and peace of mind.
+            </p>
+          </div>
+        </div>
+      </section>
+      <br><br><br><br>
+      <section id="features" class="text-center py-8 ">
+        <h2 class="text-2xl  font-bold mb-8">Key Features of LET'S DO IT<br>LET'S DO IT offers a wide range of features to enhance your task management experience:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 py-8" style="margin-right: -10px; margin-left: -100px;">
+          <p class="mb-8" ><br><br><br><br><br><br><br><br><br><br><br><br></p>
+          <div class="card">    
+              <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <svg fill="#000000" stroke="#000000" height="120px" width="120px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-51.2 -51.2 614.40 614.40" xml:space="preserve" stroke="#fafafa" stroke-width="0.0051199900000000005"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="11.263978"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M510.239,483.493L392.12,248.656c-6.028-11.988-23.177-11.965-29.194,0l-44.456,88.395L213.278,127.918v-25.595h84.328 c9.024,0,16.339-7.316,16.339-16.339V21.165c0-9.024-7.316-16.339-16.339-16.339H196.939c-9.024,0-16.339,7.316-16.339,16.339 c0,10.57,0,92.615,0,106.756L1.759,483.493c-5.454,10.845,2.437,23.681,14.596,23.681c7.883,0,471.428,0,479.288,0 C507.785,507.174,515.702,494.352,510.239,483.493z M213.278,37.504h67.989v32.141h-67.989V37.504z M196.939,168.16 l54.827,109.002l-29.396-13.42c-4.004-1.827-8.574-1.963-12.677-0.377l-75.275,29.102L196.939,168.16z M42.864,474.494 l69.679-138.537l102.515-39.631l60.163,27.465c42.254,84.006,75.464,150.043,75.795,150.702H42.864z M387.595,474.495 l-50.835-101.08l40.764-81.053l91.611,182.133H387.595z"></path> </g> </g> </g></svg>
+                      
+                      <strong class="badge text-xl">Goal Tracking</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    <div class="img">
+                      <div class="circle">
+                    </div>
+                    <div class="circle" id="right">
+                    </div>
+                    <div class="circle" id="bottom">
+                    </div>
+                  </div>
+                  <div class="front-content">
+                    <strong class="badge text-xl  py-8"><p>Set and track your goals with ease. <br> Let's Do It allows you to break down your goals into actionable tasks and monitor your progress.</p></strong>
+                    <div class="description">
+                        <div class="title">
+                          
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card" style="margin-left: 50px;">    
+              <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <svg fill="#000000" stroke="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120px" height="120px" viewBox="0 0 48.832 48.832" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="Layer_20_51_"> <g> <polygon points="15.42,32.814 22.23,32.814 22.23,34.385 15.42,34.385 15.42,35.68 36.838,35.68 36.838,34.385 28.898,34.385 28.898,32.814 37.729,32.814 37.729,29.227 15.42,29.227 "></polygon> <polygon points="9.489,11.231 41.957,11.231 41.957,24.209 44.739,24.209 44.739,8.449 6.707,8.449 6.707,17.14 9.489,17.14 "></polygon> <path d="M0,39.799h14.523V18.013H0V39.799z M7.568,38.705c-0.386,0-0.7-0.312-0.7-0.699c0-0.386,0.314-0.699,0.7-0.699 c0.387,0,0.699,0.312,0.699,0.699S7.955,38.705,7.568,38.705z M2.1,20.113h10.325l-0.001,16.072H2.1V20.113z"></path> <path d="M38.715,25.046v15.337h10.117V25.046H38.715z M43.979,25.68c0.121,0,0.22,0.101,0.22,0.221 c0,0.121-0.099,0.222-0.22,0.222c-0.123,0-0.223-0.101-0.223-0.222C43.756,25.78,43.855,25.68,43.979,25.68z M42.665,26.416 h2.623v0.212h-2.623V26.416z M43.891,39.721c-0.291,0-0.524-0.236-0.524-0.525c0-0.29,0.233-0.524,0.524-0.524 c0.289,0,0.525,0.234,0.525,0.524C44.416,39.484,44.18,39.721,43.891,39.721z M47.369,37.915 c-2.368,0.013-6.016,0.022-7.189,0.012V27.382l7.189-0.001V37.915z"></path> </g> </g> </g> </g></svg>
+                      <strong class="badge text-xl">User Friendly </strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    <div class="img">
+                      <div class="circle">
+                    </div>
+                    <div class="circle" id="right">
+                    </div>
+                    <div class="circle" id="bottom">
+                    </div>
+                  </div>
+                  <div class="front-content">
+                    <strong class="badge text-xl py-8">Our application is designed to help you stay organized and productive by providing a simple and efficient way to manage your tasks. LET'S DO IT is here to simplify your life.</strong>
+                    
+                    <div class="description">
+                        <div class="title">
+                        
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card" style="margin-left: 100px;">    
+              <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <svg fill="#000000" stroke="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120px" height="120px" viewBox="0 0 130.941 130.941" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="2.6188200000000004"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M80.472,124.706H24.354c-8.592,0-15.588-6.996-15.588-15.588V40.529c0-8.592,6.997-15.588,15.588-15.588h56.118 c7.521,0,13.822,5.355,15.271,12.453c2.021-0.566,4.056-1.017,6.102-1.267C99.799,26.202,91,18.706,80.472,18.706H47.389 c1.446-7.109,7.743-12.47,15.269-12.47h30.279c8.592,0,15.588,6.997,15.588,15.588v14.084c2.101,0.095,4.184,0.362,6.235,0.779 V21.824C114.76,9.789,104.975,0,92.937,0H62.658c-10.96,0-19.976,8.163-21.504,18.706h-16.8c-12.032,0-21.824,9.789-21.824,21.824 v68.588c0,12.032,9.792,21.823,21.824,21.823h56.118c9.463,0,17.451-6.089,20.472-14.51c-2.064-0.299-4.08-0.768-6.077-1.377 C92.528,120.711,86.963,124.706,80.472,124.706z"></path> <rect x="21.236" y="41.309" width="41.504" height="4.676"></rect> <rect x="21.236" y="62.091" width="31.956" height="4.676"></rect> <rect x="21.236" y="82.879" width="31.956" height="4.677"></rect> <rect x="21.236" y="103.662" width="41.504" height="4.677"></rect> <path d="M83.997,60.383v6.306h6.887v-6.306c0-6.455,5.249-11.697,11.704-11.697c6.441,0,11.69,5.242,11.69,11.697v6.306h6.887 v-6.306c0-10.251-8.336-18.587-18.577-18.587C92.333,41.796,83.997,50.132,83.997,60.383z"></path> <path d="M124.971,68.417H80.186c-1.888,0-3.44,1.547-3.44,3.435v34.44c0,1.899,1.553,3.446,3.44,3.446h44.785 c1.888,0,3.44-1.547,3.44-3.446v-34.44C128.411,69.958,126.858,68.417,124.971,68.417z"></path> </g> </g> </g></svg>
+                      
+                      <strong  class="badge text-xl">Privacy and Security</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    <div class="img">
+                      <div class="circle">
+                    </div>
+                    <div class="circle" id="right">
+                    </div>
+                    <div class="circle" id="bottom">
+                    </div>
+                  </div>
+                  <div class="front-content">
+                    <strong class="badge text-xl py-8">LET'S DO IT ensures top-notch privacy and security, using advanced encryption to protect your data. Manage your tasks with confidence, knowing your information is always safe with us.</strong>
+                    <div class="description">
+                        <div class="title"> 
+                        
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<br><br>
+
+    <div id="stats" class="max-w-7xl mx-auto p-4">
+      <div class=" p-8 rounded-lg text-center">
+        <div class="relative">
+          <img
+            src="{{url_for('static', filename='/images/world.jpg')}}" width="800px" height="800px"
+            alt="world map"
+            class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-lg shadow-lg"
+          />
+          <div class="relative z-10">
+            <h2 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 py-8">Track Your Progress</h2>
+            
+            <p class="text-zinc-900 font-bold dark:text-zinc-300 mb-8">
+              Let's Do It provides detailed statistics and insights to help you track your progress and
+              measure your success. <br>From task completion rates to project timelines, you can visualize
+              your achievements and identify areas for improvement. <br>Let's Do It also offers data export
+              options, allowing you to analyze your data and make data-driven decisions to optimize your
+              performance.
+            </p>
+           <br> <br>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" >
+              <div style="margin-bottom: 30px;" >
+                <p class="text-4xl font-bold text-zinc-900 dark:text-zinc-100">1,000+</p>
+                <p class="text-zinc-700 dark:text-zinc-300">Users Worldwide</p>
+              </div>
+              <div>
+                <p class="text-4xl font-bold text-zinc-900 dark:text-zinc-100">500</p>
+                <p class="text-zinc-700 dark:text-zinc-300">Tasks Managed</p>
+              </div>
+              <div>
+                <p class="text-4xl font-bold text-zinc-900 dark:text-zinc-100">98%</p>
+                <p class="text-zinc-700 dark:text-zinc-300">Customer Satisfaction</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+      <div id="faqs" class="mt-12">
+        <h2 class="text-2xl font-bold text-center mb-4">FAQs</h2>
+        <div class="space-y-4">
+          <details class="bg-grey dark:bg-zinc-700 p-4 rounded-lg shadow">
+            <summary class="font-semibold text-zinc-900 dark:text-zinc-100 cursor-pointer">Is Let's Do It free to use?</summary>
+            <p class="mt-2 text-zinc-700 dark:text-zinc-300">Yes, Let's Do It offers a free plan with basic features.</p>
+          </details>
+          <details class="bg-grey dark:bg-zinc-700 p-4 rounded-lg shadow">
+            <summary class="font-semibold text-zinc-900 dark:text-zinc-100 cursor-pointer">Is my data secure with Let's Do It?</summary>
+            <p class="mt-2 text-zinc-700 dark:text-zinc-300">Yes, we prioritize data security and use industry-standard measures to protect your data.</p>
+          </details>
+          <details class="bg-grey dark:bg-zinc-700 p-4 rounded-lg shadow">
+            <summary class="font-semibold text-zinc-900 dark:text-zinc-100 cursor-pointer">Can I access Let's Do It on my mobile device?</summary>
+            <p class="mt-2 text-zinc-700 dark:text-zinc-300">Yes, Let's Do will have a mobile app available for iOS and Android devices. Stay productive on the go!</p>
+          </details>
+          <details class="bg-grey dark:bg-zinc-700 p-4 rounded-lg shadow">
+            <summary class="font-semibold text-zinc-900 dark:text-zinc-100 cursor-pointer">How can Let's Do It help me achieve my goals?</summary>
+            <p class="mt-2 text-zinc-700 dark:text-zinc-300">Let's Do It provides tools and insights to help you track your progress, stay organized, and achieve your goals efficiently.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+<br><br>
+
+      <section class="text-center py-8">
+        <h2 class="text-2xl font-bold mb-4">Subscribe to our newsletter</h2>
+        <form class="flex items-center space-x-2">
+          <input type="email" placeholder="Email, eg: example@domain.com" class="p-3 rounded-full border border-zinc-300 dark:border-zinc-700 flex-grow">
+          <button class="button">
+            <a class="button-content">Submit</a>
+          </button>
+        </form>
+      </section>
+    </main>
+        <footer class="bg-zinc-100 dark:bg-zinc-800 text-center py-4" style="background-color: #fbf6e9">
+          <p>&copy; Copyright LET'S DO IT | 2024</p>
+        </footer>
+      </div>
+        </body>
+      </html>   
