@@ -126,6 +126,7 @@ def dashboard():
 @app.route('/add_list', methods=['POST'])
 @login_required
 def add_list():
+    """function to add a new list"""
     list_name = request.form.get('list_name')
     if list_name:
         new_list = TaskList(name=list_name, user_id=current_user.id)
@@ -137,6 +138,7 @@ def add_list():
 @app.route('/add_task/<int:list_id>', methods=['POST'])
 @login_required
 def add_task(list_id):
+    """function to add a new task"""
     task_description = request.form.get('task_description')
     if task_description:
         new_task = ToDo(description=task_description, user_id=current_user.id, list_id=list_id)
@@ -148,6 +150,7 @@ def add_task(list_id):
 @app.route('/update_task/<int:task_id>', methods=['POST'])
 @login_required
 def update_task(task_id):
+    """function to update an existed task to complete"""
     task = ToDo.query.get(task_id)
     if task and task.user_id == current_user.id:
         task.complete = not task.complete
